@@ -1,15 +1,14 @@
 (function($){
   var visible;
 
-  $.fn.dropmenu = function(config){
-    var defaults = {
+  $.fn.dropmenu = function(options){
+    var settings = $.extend({
           defaultVisible: false,
           triggerElement: 'dt',
           childElement  : 'dd'
-        };
+        }, options);
 
-    var settings   = $.extend(defaults, config),
-        triggerObj = $(this).find(settings.triggerElement),
+    var triggerObj = $(this).find(settings.triggerElement),
         childObj   = $(this).find(settings.childElement);
 
     visible = settings.defaultVisible;
