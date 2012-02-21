@@ -8,7 +8,8 @@
           childElement  : 'dd'
         }, options);
 
-    var triggerObj = $(this).find(settings.triggerElement),
+    var parentObj  = $(this),
+        triggerObj = $(this).find(settings.triggerElement),
         childObj   = $(this).find(settings.childElement);
 
     visible = settings.defaultVisible;
@@ -24,15 +25,18 @@
       }
     });
 
-    $(document).click(function(){
-      if (!visible) {
-        childObj.slideUp();
+    $(document).click(function(ev){
+      if (ev.target !== parentObj && !parentObj.has(ev.target).length) {
+        if (visible) {
+          childObj.slideUp();
+          switchVisible();
+        }
       }
     });
 
-    $(this).click(function(ev){
-      ev.stopPropagation();
-    });
+    //$(this).click(function(ev){
+    //  ev.stopPropagation();
+    //});
   };
 
   function switchVisible(){
